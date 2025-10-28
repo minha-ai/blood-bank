@@ -1,0 +1,94 @@
+/* Intro Section Styles */
+#intro {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  text-align: center;
+  padding: 60px 24px;
+  border-radius: 12px;
+  background: url('blood-donation-bg.jpg') no-repeat center/cover;
+}
+
+#intro::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35); /* overlay for readability */
+  z-index: 0;
+}
+
+#intro h1,
+#intro p,
+#intro .btn {
+  position: relative;
+  z-index: 1;
+}
+
+/* Fade-in animation */
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(20px);}
+  100% { opacity: 1; transform: translateY(0);}
+}
+
+#intro h1 { animation: fadeUp 1s ease forwards; }
+#intro p { animation: fadeUp 1s ease 0.3s forwards; }
+#intro .btn { animation: fadeUp 1s ease 0.6s forwards; }
+
+/* Floating decorative images */
+.float-img {
+  position: absolute;
+  width: 40px;
+  opacity: 0.8;
+  animation: float 4s ease-in-out infinite;
+}
+
+.float1 { top: 10%; left: 5%; animation-delay: 0s;}
+.float2 { bottom: 15%; right: 10%; animation-delay: 2s;}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0);}
+  50% { transform: translateY(-15px);}
+}
+/* Layout for the banks section: controls at left, map at right */
+.map-wrapper {
+  display: flex;
+  align-items: flex-start;    /* align items at top */
+  width: 100%;
+  gap: 24px;                  /* space between left controls and map */
+  box-sizing: border-box;
+}
+
+/* Left area that holds the button(s) and controls */
+.map-wrapper .controls {
+  flex:40%;             /* do not grow, size to content */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Right map column: fixed or relative width, pushed to right */
+.map-wrapper .map-container {
+  flex:50%;              /* change 60% to desired width (e.g. 50% or 70%) */
+  margin-left: 30%;          /* pushes the map-container to the far right */
+}
+
+/* The actual Leaflet map must fill the container */
+#map {
+  width: 100%;
+  height: 400px;              /* adjust height as needed */
+  border-radius: 10px;
+}
+
+/* Make it responsive: stack vertically on small screens */
+@media (max-width: 880px) {
+  .map-wrapper {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .map-wrapper .map-container {
+    flex: 1 1 auto;
+    margin-left: 0;
+  }
+  #map { height: 300px; }
+}
+
